@@ -1,0 +1,101 @@
+<div class="row" ng-init="loadSingleSurvey()">
+  <div class="col-lg-8 col-md-7">
+    <h3>{{surveyTitle}}</h3>
+    <br>
+    <div class="post-preview">
+      <h4>
+        {{surveySubtitle}}
+      </h4>
+      <br>
+      <p class="post-meta text-justify">
+        {{instructions}}
+      </p>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-lg-5 col-md-5">
+   <a class="btn btn-primary btn-xs" href="#/{{survey.surveyId}}/edit">Edit survey</a>
+   <a class="btn btn-primary btn-xs" ng-click="deleteSurvey(survey.surveyId)">Delete survey</a>
+   <a class="btn btn-primary btn-xs" href="#/{{survey.surveyId}}/question/create">Add question</a>
+ </div>
+      <!--  <div class="col-lg-2 col-md-2">
+             <a class="btn btn-primary btn-xs" href="#/{{survey.surveyId}}/question/create">Add question</a>
+        </div>
+        <div class="col-lg-2 col-md-2">
+             <a class="btn btn-primary btn-xs" href="#/{{survey.surveyId}}/delete">Delete survey</a>
+           </div> -->
+  <div class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5">
+   <a class="btn btn-primary btn-xs" href="#/home">Back to home</a>
+  </div>
+</div>
+<br><br>
+
+<div class="row" ng-show="(surveyqstns.length>0)">
+  <div class="col-lg-12 col-md-12">
+  <h4>Questions</h4>
+  </div>
+</div>
+
+<div ng-repeat="surveyqstn in surveyqstns">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div>
+      <h5>
+        {{surveyqstn.questionText}}
+        <a ng-click="editClicked();trackQuestionIndex($index)">
+          <span title="edit" class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <a ng-click="deleteQuestion(surveyqstn.questionId, $index)">
+          <span title="delete" class="glyphicon glyphicon-remove"></span>
+        </a>
+      </h5>
+      </div>
+    </div>
+  </div>
+
+<div ng-show="editClick == 'true' && currentQuestionIndex == $index">
+    <form ng-submit="editQuestion(surveyqstn.questionId, surveyqstn.questionText)">
+      <input class="form-control" type="text" ng-model="surveyqstn.questionText" required>
+      <br>
+      <input class="btn btn-primary" type="submit" value="Update question">
+    </form>
+</div>
+
+<div>
+  <ul ng-repeat="questionOption in surveyqstn.questionOptions">
+    <li>{{questionOption}}</li>
+  </ul>
+  <a ng-show="surveyqstn.questionOptions.length>0" class="btn btn-primary btn-xs"
+   ng-click="deleteOptions(surveyqstn.questionId)">Delete all options
+  </a>
+  <a ng-show="surveyqstn.answers.length > 0" class="btn btn-primary btn-xs"
+   ng-click="deleteAnswers(surveyqstn.questionId)">Delete all answers
+</a>
+</div>
+<br>
+
+  <div>
+    <input type="button" class="btn btn-primary btn-xs" value="Add options" ng-model='$index' ng-click="addOption='true'; trackQuestionIndex($index)">
+
+    <div ng-show="(addOption == 'true') && currentQuestionIndex == $index">
+    <form ng-submit="addOptions(surveyqstn.questionId, $index)">
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="option" ng-model="optionData.optionText" required>
+      </div>
+      <input class="btn btn-primary btn-xs" type="submit" value="add option">
+    </form>
+    </div>
+  </div>
+
+<!--<div class="row" ng-show="(surveyqstn.questionOptions.length > 0)">
+  <div class="col-lg-2 col-md-2">
+    <ul>
+      <li ng-repeat= "surveyqstn.questionOption in surveyqstn.questionOptions">{{surveyqstn.questionOption}}</li>
+    </ul>
+  </div>
+</div>-->
+
+</div>

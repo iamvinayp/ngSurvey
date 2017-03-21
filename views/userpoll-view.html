@@ -1,0 +1,43 @@
+<div class="row" ng-init="loadSingleSurvey()">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h3>{{surveyTitle}}</h3>
+    <div class="post-preview">
+      <h4>
+        {{surveySubtitle}}
+      </h4>
+      <p class="text-justify">
+        {{instructions}}
+      </p>
+    </div>
+
+    <div ng-show="surveyqstns.length > 0" ng-hide ="(currentQuestionIndex == surveyqstns.length)">
+      <h4>Questions for the survey</h4> <br>
+      <div ng-repeat="surveyqstn in surveyqstns">
+        <div ng-show="$index == currentQuestionIndex">
+          <h5>{{surveyqstn.questionText}}</h5>
+          <form>
+          <div ng-repeat="questionOption in surveyqstn.questionOptions">
+            <div class="radio">
+              <label>
+                <input type="radio" name="optradio" ng-click="selectedOption($index)" required>
+                {{questionOption}}
+              </label>
+            </div>
+          </div>
+          </form>
+          <div>
+            <a class="btn btn-default btn-xs" ng-click="createAnswer(surveyqstn.questionId)">Next</a>
+            <a class="btn btn-default btn-xs" ng-click="trackQuestionIndex($index);skipAnswer(surveyqstn.questionId)">Skip</a>
+            <br><br>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div ng-show ="(currentQuestionIndex == surveyqstns.length)">
+      <h2>Thank you for participating in the survey !!</h2>
+    </div>
+
+  </div>
+</div>

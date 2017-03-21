@@ -1,0 +1,19 @@
+ <div class="row" ng-init="getCurrentSurvey()">
+            <div class="col-lg-8 col-md-7">
+                <h2>Edit this survey</h2>
+                <div class="post-preview">
+                   <form ng-submit="editCurrentSurvey()">
+                      <div class="form-group">
+                       <input class="form-control" type="text" ng-model="surveyTitle" required>
+                      </div>
+                      <div class="form-group">
+                       <input class="form-control" type="text" ng-model="surveySubtitle" required>
+                      </div>
+                      <div class="form-group">
+                       <textarea class="form-control" rows="4" cols="50" ng-model="instructions" required>
+                       </textarea>
+                      </div>
+                       <input class="btn btn-primary" type="submit" value="Update survey">
+                   </form>
+                </div>
+</div>

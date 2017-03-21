@@ -1,0 +1,19 @@
+<div class="post-preview" ng-repeat="survey in surveys">
+    <div class="row">
+        <div class="col-lg-8 col-md-7">
+                <div class="well well-sm">
+                    <a href="#/{{survey.surveyId}}">
+                        <h3 class="post-title">
+                            {{survey.surveyTitle}}
+                        </h3>
+                        <h4 class="post-subtitle">
+                             {{survey.surveySubtitle}}
+                        </h4>
+                    </a>
+                    <br>
+                    <a class="btn btn-primary btn-xs" ng-click="deleteSurvey(survey.surveyId, $index)">Delete survey</a>
+                    <a class="btn btn-primary btn-xs" href="#/{{survey.surveyId}}/poll">Poll survey</a>
+                </div>
+        </div>
+    </div>
+</div>
